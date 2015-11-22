@@ -1,0 +1,38 @@
+makecachematrix <- function (X = matrix()) {
+  
+  matrixinverse <- NULL
+  
+  set <- function (y = matrix()) {  
+    X <<- y
+    matirxinverse<<- NULL
+  }
+  
+  get <- function () X
+  setinverse <- function(inverse) {
+  matrixinverse <<-inverse
+  return(matrixinverse)
+  }
+  getinverse <- function() matirxinverse
+  list (set = set, get = get,
+        setinverse = setinverse,
+        getinverse = getinverse)
+  
+}
+
+makecachematrix(1:4)
+
+cacheinverse <- function(X, ...)
+{
+  calculatedmatrixinverse <- X$getinverse()
+  
+  if(!is.null(calculatedmatrixinverse)){
+    message("getting inverse from cache")
+    return(calculatedmatrixinverse)
+  }
+  
+  matrix <- X$get()
+  calculatedmatrixinverse <- solve(matrix)
+  message("value of inverse is ")
+  X$setinverse(calculatedmatrixinverse)
+}
+
